@@ -58,7 +58,12 @@ Running `npm run dev` in a plain browser also works. `api.ts` and `mapSetup.ts` 
 
 ## Development
 
-Prerequisites: Node ≥ 22, Rust ≥ 1.90 and the [Tauri system dependencies](https://v2.tauri.app/start/prerequisites/) (on Linux: `webkit2gtk-4.1`).
+Prerequisites:
+- **Node `^20.19` or `≥ 22.12`** (Vite 8 requirement; `.npmrc` makes `npm install` fail fast on older versions). On Windows on ARM, use the native **ARM64** Node build.
+- **Rust ≥ 1.90**
+- The [Tauri system dependencies](https://v2.tauri.app/start/prerequisites/). On Linux that's `webkit2gtk-4.1`. On Windows it's the Visual Studio Build Tools with "Desktop development with C++" (on ARM devices also the *MSVC ARM64 build tools*) and WebView2, which ships with Windows 11.
+
+If `npm run dev` fails with *"Cannot find native binding"*, check `node -v` and `node -p process.arch`, then delete `node_modules` and run `npm install` again. On Windows the app uses the system TLS (SChannel) instead of rustls, so no extra C toolchain such as clang is needed on ARM64.
 
 ```sh
 npm install
