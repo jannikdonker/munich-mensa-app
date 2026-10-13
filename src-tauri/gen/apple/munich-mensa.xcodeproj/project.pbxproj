@@ -1,0 +1,474 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F1E7A9295995760FC46E705 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258F20482F77E9B861C41026 /* CoreGraphics.framework */; };
+		34B24F0928EE56F0314C55C8 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6411CF0AD5784E38B86AE8A /* Metal.framework */; };
+		3AC2477375B14ACEB592048F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0E433AACBD6799AC28AE79 /* QuartzCore.framework */; };
+		4286C7E8CD978FCE9A165EE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73697DF5EC1B7950A9C9AEDD /* Assets.xcassets */; };
+		4E03260E445303C957B7CBDD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6DAA325A68EE533E9CDFF3 /* Security.framework */; };
+		9FCB5C7FACEC774BC35D0AFE /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86E23D409EA92772422AD7EE /* main.mm */; };
+		A8EF4FB8F8015D172729B498 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C3D79F358A70D0A4217FDD3 /* LaunchScreen.storyboard */; };
+		B6BF5BFCA64E3C9A32FA7FD5 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CEF97C1CA2B9A4A82D5347 /* WebKit.framework */; };
+		D43D9BE3A34C0C6D93AC451A /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 570DDC8D6DCBB396DCBC8FF8 /* MetalKit.framework */; };
+		DD08E79956B1E401AA7FFED4 /* libapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA263C3B7F7837B8B9C573FD /* libapp.a */; };
+		FAB366D8CF81051CE52FA2CE /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 20E18FA5ED4E4CF8B3FD0315 /* assets */; };
+		FF01B6A1DE9683F35276E833 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A849B51094B09242FEBB086 /* UIKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0262F6F9BDC1752ECC5DA1EF /* lib.rs */ = {isa = PBXFileReference; path = lib.rs; sourceTree = "<group>"; };
+		1C3D79F358A70D0A4217FDD3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		20E18FA5ED4E4CF8B3FD0315 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = SOURCE_ROOT; };
+		258F20482F77E9B861C41026 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3BD71132F5BEDB851E7CAE40 /* eat_api.rs */ = {isa = PBXFileReference; path = eat_api.rs; sourceTree = "<group>"; };
+		3F3A598D7255D217B6B23453 /* http.rs */ = {isa = PBXFileReference; path = http.rs; sourceTree = "<group>"; };
+		50B0BE8C92ABCC6F6F95B1BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5597BC4425564DEDCF20244B /* bindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindings.h; sourceTree = "<group>"; };
+		570DDC8D6DCBB396DCBC8FF8 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		5F15CAD3E0401AA92E300140 /* gestures.rs */ = {isa = PBXFileReference; path = gestures.rs; sourceTree = "<group>"; };
+		72CEF97C1CA2B9A4A82D5347 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		73697DF5EC1B7950A9C9AEDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		79B6C193937DDD57F44C0A1D /* main.rs */ = {isa = PBXFileReference; path = main.rs; sourceTree = "<group>"; };
+		86E23D409EA92772422AD7EE /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		8AC32E8C70D3CB43BFD21A1F /* munich-mensa_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "munich-mensa_iOS.entitlements"; sourceTree = "<group>"; };
+		99D8F1193C1370097B210930 /* map_data.rs */ = {isa = PBXFileReference; path = map_data.rs; sourceTree = "<group>"; };
+		9A849B51094B09242FEBB086 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B6411CF0AD5784E38B86AE8A /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		C591BC579CE06395A61DBCB9 /* swm.rs */ = {isa = PBXFileReference; path = swm.rs; sourceTree = "<group>"; };
+		C6BF1249CC5E28078B115E09 /* cache.rs */ = {isa = PBXFileReference; path = cache.rs; sourceTree = "<group>"; };
+		C6FB2F004F983BB7A890A625 /* munich-mensa_iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "munich-mensa_iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC6DAA325A68EE533E9CDFF3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		EA263C3B7F7837B8B9C573FD /* libapp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libapp.a; sourceTree = "<group>"; };
+		FA0E433AACBD6799AC28AE79 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B129FDBDAF074E9120981210 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD08E79956B1E401AA7FFED4 /* libapp.a in Frameworks */,
+				0F1E7A9295995760FC46E705 /* CoreGraphics.framework in Frameworks */,
+				34B24F0928EE56F0314C55C8 /* Metal.framework in Frameworks */,
+				D43D9BE3A34C0C6D93AC451A /* MetalKit.framework in Frameworks */,
+				3AC2477375B14ACEB592048F /* QuartzCore.framework in Frameworks */,
+				4E03260E445303C957B7CBDD /* Security.framework in Frameworks */,
+				FF01B6A1DE9683F35276E833 /* UIKit.framework in Frameworks */,
+				B6BF5BFCA64E3C9A32FA7FD5 /* WebKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		41032989FED50A501B1E93A4 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C14D7A157620B51DB2BB4C9F /* munich-mensa */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		42AADD9C959BD60215308948 /* bindings */ = {
+			isa = PBXGroup;
+			children = (
+				5597BC4425564DEDCF20244B /* bindings.h */,
+			);
+			path = bindings;
+			sourceTree = "<group>";
+		};
+		4E6ED2A52B61D778134FA380 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				258F20482F77E9B861C41026 /* CoreGraphics.framework */,
+				EA263C3B7F7837B8B9C573FD /* libapp.a */,
+				B6411CF0AD5784E38B86AE8A /* Metal.framework */,
+				570DDC8D6DCBB396DCBC8FF8 /* MetalKit.framework */,
+				FA0E433AACBD6799AC28AE79 /* QuartzCore.framework */,
+				DC6DAA325A68EE533E9CDFF3 /* Security.framework */,
+				9A849B51094B09242FEBB086 /* UIKit.framework */,
+				72CEF97C1CA2B9A4A82D5347 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		644FB89ABAC0FC1A382D6AAF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C6FB2F004F983BB7A890A625 /* munich-mensa_iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8B38D536C2E8266814C229A0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C6BF1249CC5E28078B115E09 /* cache.rs */,
+				3BD71132F5BEDB851E7CAE40 /* eat_api.rs */,
+				5F15CAD3E0401AA92E300140 /* gestures.rs */,
+				3F3A598D7255D217B6B23453 /* http.rs */,
+				0262F6F9BDC1752ECC5DA1EF /* lib.rs */,
+				79B6C193937DDD57F44C0A1D /* main.rs */,
+				99D8F1193C1370097B210930 /* map_data.rs */,
+				C591BC579CE06395A61DBCB9 /* swm.rs */,
+			);
+			name = src;
+			path = ../../src;
+			sourceTree = "<group>";
+		};
+		AB3CD57822FB98D7F225D3D1 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Externals;
+			sourceTree = "<group>";
+		};
+		B1FA3DDECAA129E8612A7F1A /* munich-mensa_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				50B0BE8C92ABCC6F6F95B1BC /* Info.plist */,
+				8AC32E8C70D3CB43BFD21A1F /* munich-mensa_iOS.entitlements */,
+			);
+			path = "munich-mensa_iOS";
+			sourceTree = "<group>";
+		};
+		C14D7A157620B51DB2BB4C9F /* munich-mensa */ = {
+			isa = PBXGroup;
+			children = (
+				86E23D409EA92772422AD7EE /* main.mm */,
+				42AADD9C959BD60215308948 /* bindings */,
+			);
+			path = "munich-mensa";
+			sourceTree = "<group>";
+		};
+		F79F599E511675093F6161DD = {
+			isa = PBXGroup;
+			children = (
+				20E18FA5ED4E4CF8B3FD0315 /* assets */,
+				73697DF5EC1B7950A9C9AEDD /* Assets.xcassets */,
+				1C3D79F358A70D0A4217FDD3 /* LaunchScreen.storyboard */,
+				AB3CD57822FB98D7F225D3D1 /* Externals */,
+				B1FA3DDECAA129E8612A7F1A /* munich-mensa_iOS */,
+				41032989FED50A501B1E93A4 /* Sources */,
+				8B38D536C2E8266814C229A0 /* src */,
+				4E6ED2A52B61D778134FA380 /* Frameworks */,
+				644FB89ABAC0FC1A382D6AAF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		43287A5B344BC26887DA7B8C /* munich-mensa_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3BDD9A1B7E0F35FCDD48E2E2 /* Build configuration list for PBXNativeTarget "munich-mensa_iOS" */;
+			buildPhases = (
+				696A8BAA7611B80B651F63E1 /* Build Rust Code */,
+				607C41D1F207091363EF92C9 /* Sources */,
+				00395C398061F1CFD7A8E942 /* Resources */,
+				B129FDBDAF074E9120981210 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "munich-mensa_iOS";
+			packageProductDependencies = (
+			);
+			productName = "munich-mensa_iOS";
+			productReference = C6FB2F004F983BB7A890A625 /* munich-mensa_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F4C7AA42D7AA1E0FC72B7FEB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					43287A5B344BC26887DA7B8C = {
+					};
+				};
+			};
+			buildConfigurationList = BDFF7021C8840CA4C09A9CD8 /* Build configuration list for PBXProject "munich-mensa" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = F79F599E511675093F6161DD;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 644FB89ABAC0FC1A382D6AAF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				43287A5B344BC26887DA7B8C /* munich-mensa_iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		00395C398061F1CFD7A8E942 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4286C7E8CD978FCE9A165EE7 /* Assets.xcassets in Resources */,
+				A8EF4FB8F8015D172729B498 /* LaunchScreen.storyboard in Resources */,
+				FAB366D8CF81051CE52FA2CE /* assets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		696A8BAA7611B80B651F63E1 /* Build Rust Code */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Rust Code";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/Externals/x86_64/${CONFIGURATION}/libapp.a",
+				"$(SRCROOT)/Externals/arm64/${CONFIGURATION}/libapp.a",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "npm run -- tauri ios xcode-script -v --platform \"${PLATFORM_DISPLAY_NAME:?}\" --sdk-root \"${SDKROOT:?}\" --framework-search-paths \"${FRAMEWORK_SEARCH_PATHS:?}\" --header-search-paths \"${HEADER_SEARCH_PATHS:?}\" --gcc-preprocessor-definitions \"${GCC_PREPROCESSOR_DEFINITIONS:-}\" --configuration \"${CONFIGURATION:?}\" ${FORCE_COLOR} ${ARCHS:?}\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		607C41D1F207091363EF92C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FCB5C7FACEC774BC35D0AFE /* main.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		62C54089B7B11915D04BBAEF /* debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ARCHS = (
+					arm64,
+				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "munich-mensa_iOS/munich-mensa_iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphoneos*]" = x86_64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\".\"",
+				);
+				INFOPLIST_FILE = "munich-mensa_iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=arm64]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = "$(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = app.munichmensa;
+				PRODUCT_NAME = "Munich Mensa";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+			};
+			name = debug;
+		};
+		A75B025095086845E72336DB /* debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = debug;
+		};
+		BDD00D7C9C721B23757D1E0E /* release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = release;
+		};
+		BFA67EA622B8F42085D033A3 /* release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ARCHS = (
+					arm64,
+				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "munich-mensa_iOS/munich-mensa_iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphoneos*]" = x86_64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\".\"",
+				);
+				INFOPLIST_FILE = "munich-mensa_iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=arm64]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = "$(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = app.munichmensa;
+				PRODUCT_NAME = "Munich Mensa";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+			};
+			name = release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3BDD9A1B7E0F35FCDD48E2E2 /* Build configuration list for PBXNativeTarget "munich-mensa_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62C54089B7B11915D04BBAEF /* debug */,
+				BFA67EA622B8F42085D033A3 /* release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = debug;
+		};
+		BDFF7021C8840CA4C09A9CD8 /* Build configuration list for PBXProject "munich-mensa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A75B025095086845E72336DB /* debug */,
+				BDD00D7C9C721B23757D1E0E /* release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F4C7AA42D7AA1E0FC72B7FEB /* Project object */;
+}
