@@ -12,6 +12,7 @@ settingGroups:
     base:
       PRODUCT_NAME: Munich Mensa
       PRODUCT_BUNDLE_IDENTIFIER: app.munichmensa
+      DEVELOPMENT_TEAM: J59ZL9QU84
 targetTemplates:
   app:
     type: application

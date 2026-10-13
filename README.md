@@ -102,7 +102,7 @@ Prerequisites:
 - **Xcode**, signed in with your Apple ID under *Xcode → Settings → Accounts*.
 - **CocoaPods**: `brew install cocoapods`.
 - **Rust targets**: `rustup target add aarch64-apple-ios aarch64-apple-ios-sim`.
-- **Signing team.** Set `APPLE_DEVELOPMENT_TEAM` to your team ID, e.g. in your shell profile (`npm run tauri info` lists the teams of your signing certificates). Tauri writes it into `project.pbxproj` on every build; don't commit that change.
+- **Signing team.** The project signs with team `J59ZL9QU84` (`DEVELOPMENT_TEAM` in `src-tauri/gen/apple/project.yml` and `project.pbxproj`). To sign with another account, set `APPLE_DEVELOPMENT_TEAM` to your team ID; `npm run tauri info` lists the teams of your signing certificates.
 - **For an iPhone**: turn on *Settings → Privacy & Security → Developer Mode*, and connect it by cable once so Xcode can register it. In dev mode, the iPhone and the Mac must be on the same network.
 
 Development, with hot reload for the frontend and rebuilds on Rust changes:
