@@ -7,14 +7,30 @@
   import Icon from './lib/Icon.svelte'
   import MapView from './lib/MapView.svelte'
   import { locale, priceGroupNames, t } from './lib/i18n'
+  import { attachSheetDrag } from './lib/sheetGesture'
   import { app, savePref } from './lib/store.svelte'
   import type { PriceGroup } from './lib/types'
 
   const PRICE_GROUPS: PriceGroup[] = ['students', 'staff', 'guests']
 
   let compact = $state(false)
+  let panel = $state<HTMLElement>()
   let sheetExpanded = $state(false)
   let sheetHeight = $state(0)
+  /** Height in px while the sheet follows a finger. */
+  let dragHeight = $state<number | null>(null)
+
+  $effect(() => {
+    if (!compact || !panel) return
+    return attachSheetDrag(panel, {
+      expanded: () => sheetExpanded,
+      ondrag: (height) => (dragHeight = height),
+      onrelease: (expanded) => {
+        dragHeight = null
+        sheetExpanded = expanded
+      },
+    })
+  })
 
   $effect(() => savePref('lang', app.lang))
   $effect(() => savePref('priceGroup', app.priceGroup))
@@ -106,6 +122,9 @@
     <aside
       class="panel"
       class:expanded={sheetExpanded}
+      class:dragging={dragHeight !== null}
+      style:height={dragHeight === null ? undefined : `${dragHeight}px`}
+      bind:this={panel}
       bind:clientHeight={sheetHeight}
     >
       {#if compact}
@@ -315,12 +334,17 @@
     inset: 0;
   }
   .compact .panel {
+    --collapsed: 42%;
+    --expanded: calc(100% - 2.5rem);
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
     width: auto;
-    height: 42%;
+    height: var(--collapsed);
+    /* A drag sets any height; these keep it between the two positions. */
+    min-height: var(--collapsed);
+    max-height: var(--expanded);
     border-right: none;
     border-radius: 1rem 1rem 0 0;
     box-shadow: var(--shadow);
@@ -328,7 +352,10 @@
     transition: height 0.25s ease;
   }
   .compact .panel.expanded {
-    height: calc(100% - 2.5rem);
+    height: var(--expanded);
+  }
+  .compact .panel.dragging {
+    transition: none;
   }
   .handle {
     flex: none;

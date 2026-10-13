@@ -7,7 +7,7 @@ A cross-platform [Tauri v2](https://v2.tauri.app) app that shows every Studieren
 - **Weekly menus.** Pick any weekday of this week or the next two. Dishes are grouped by counter and each gets a fitting emoji. They show vegan/veggie/meat/fish badges, prices for students, staff or guests, and allergens (tap a dish).
 - **Opening hours** with a live "open until …" or "opens at …" status in Munich time.
 - **Search** across location names *and* the selected day's dishes ("curry", "Schnitzel" …), plus filters for type, diet and "still open".
-- **German / English** and a responsive layout: a sidebar on desktop and a bottom sheet on phones.
+- **German / English** and a responsive layout: a sidebar on desktop and a bottom sheet on phones that you swipe up and down.
 - **Light / dark** follows the system by default. The sun/moon button overrides it, and switching back to what the system shows returns to following it.
 - **Works offline.** Menus and map tiles are cached on disk by the Rust side.
 
@@ -35,6 +35,7 @@ src/                     Svelte 5 + TypeScript frontend (Vite)
   lib/MapView.svelte     MapLibre map and markers
   lib/mapSetup.ts        MapLibre worker + `ofm://` protocol that routes map requests to Rust
   lib/mapGestures.ts     touchpad pinch / two-finger pan handling
+  lib/sheetGesture.ts    swiping the bottom sheet on phones
   lib/mapTheme.ts        lifts OpenFreeMap's near-black dark style to a softer palette
   lib/dishEmoji.ts       emoji per dish from its German/English name, counter and labels
   lib/locations.ts       Studierendenwerk locations missing from / outdated in eat-api
@@ -77,11 +78,70 @@ cd src-tauri && cargo test   # Rust unit tests
 
 ### Mobile
 
-The crate already has the `mobile_entry_point`, and the UI is touch-friendly. With the Android SDK/NDK or Xcode installed:
+The crate has the `mobile_entry_point`, and on phones the sidebar becomes a bottom sheet that you swipe or tap open. The iOS project is checked in under `src-tauri/gen/apple`. Android isn't set up yet, so run `npm run tauri android init` once to generate `src-tauri/gen/android`.
+
+Flags for the Tauri CLI go after `--`, so that npm passes them on instead of reading them itself.
+
+#### iOS (macOS only)
+
+Prerequisites:
+- **Xcode**, signed in with your Apple ID under *Xcode → Settings → Accounts*.
+- **CocoaPods**: `brew install cocoapods`.
+- **Rust targets**: `rustup target add aarch64-apple-ios aarch64-apple-ios-sim`.
+- **Signing team.** Set `APPLE_DEVELOPMENT_TEAM` to your team ID, e.g. in your shell profile (`npm run tauri info` lists the teams of your signing certificates). Tauri writes it into `project.pbxproj` on every build; don't commit that change.
+- **For an iPhone**: turn on *Settings → Privacy & Security → Developer Mode*, and connect it by cable once so Xcode can register it. In dev mode, the iPhone and the Mac must be on the same network.
+
+Development, with hot reload for the frontend and rebuilds on Rust changes:
 
 ```sh
-npm run tauri android init && npm run tauri android dev
-npm run tauri ios init && npm run tauri ios dev       # macOS only
+npm run tauri ios dev                     # asks for a simulator or a connected iPhone
+npm run tauri ios dev "iPhone 17 Pro"     # runs on that simulator or device directly
+npm run tauri ios dev -- --open           # opens Xcode instead, to run and debug from there
 ```
+
+On an iPhone, the app loads the frontend from the Vite dev server on your Mac. The CLI sets `TAURI_DEV_HOST` to the Mac's network address, and `vite.config.ts` makes Vite listen there. To inspect the web view of a debug build, enable *Safari → Settings → Advanced → Show features for web developers*. Then open *Develop → (device) → Munich Mensa*.
+
+To install a release build on your own iPhone, which then runs without the Mac:
+
+```sh
+npm run tauri ios run -- --release
+```
+
+With a free Apple ID (Personal Team), the app stops launching after 7 days and has to be installed again. With a paid Apple Developer Program membership, the signature lasts a year.
+
+#### iOS release builds and distribution
+
+`npm run tauri ios build` builds the IPA at `src-tauri/gen/apple/build/arm64/Munich Mensa.ipa`. The export method decides who can install it:
+
+```sh
+npm run tauri ios build                                        # "debugging" (default): development-signed, the team's registered devices
+npm run tauri ios build -- --export-method release-testing     # ad hoc distribution to registered devices
+npm run tauri ios build -- --export-method app-store-connect   # TestFlight and the App Store
+```
+
+TestFlight and the App Store need the paid Apple Developer Program and an app in [App Store Connect](https://appstoreconnect.apple.com) with the bundle ID `app.munichmensa`. Every upload needs a higher build number. Pass `--build-number <n>`, or set `bundle.iOS.bundleVersion` in `tauri.conf.json`. Upload the IPA with Apple's Transporter app or from the command line:
+
+```sh
+xcrun altool --upload-app --type ios --file "src-tauri/gen/apple/build/arm64/Munich Mensa.ipa" \
+  --apiKey <key id> --apiIssuer <issuer id>     # key file: ~/.appstoreconnect/private_keys/AuthKey_<key id>.p8
+```
+
+Create the API key under *Users and Access → Integrations* in App Store Connect. After processing, the build shows up in TestFlight. From there it can be sent to testers or submitted for review.
+
+The app's version comes from `version` in `tauri.conf.json`, so bump it there. Keep `package.json`, `src-tauri/Cargo.toml` and the checked-in `src-tauri/gen/apple/project.yml` and `Info.plist` in sync.
+
+`Cargo.lock` pins `libc` to 0.2.189 because 0.2.190 breaks the iOS build. That release limits `mach_task_self` to macOS, and `num_threads` (pulled in by `time`) needs it. A plain `cargo update` undoes the pin. Restore it with `cargo update -p libc --precise 0.2.189` until a fix lands upstream.
+
+#### Android
+
+Prerequisites: Android Studio with the SDK, NDK and command-line tools. `JAVA_HOME`, `ANDROID_HOME` and `NDK_HOME` must be set, and you need the Rust targets `aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android`. See [Tauri's prerequisites](https://v2.tauri.app/start/prerequisites/#android).
+
+```sh
+npm run tauri android init      # once: generates src-tauri/gen/android
+npm run tauri android dev       # emulator or USB-connected device, with hot reload
+npm run tauri android build     # release APK and AAB under src-tauri/gen/android/app/build/outputs/
+```
+
+Release builds have to be signed before they can be installed or uploaded to Google Play. Set up a keystore as described in [Tauri's Android signing guide](https://v2.tauri.app/distribute/sign/android/).
 
 App icons for all platforms are generated from `app-icon.svg` with `npm run tauri icon app-icon.svg`.
