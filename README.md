@@ -144,4 +144,11 @@ npm run tauri android build     # release APK and AAB under src-tauri/gen/androi
 
 Release builds have to be signed before they can be installed or uploaded to Google Play. Set up a keystore as described in [Tauri's Android signing guide](https://v2.tauri.app/distribute/sign/android/).
 
-App icons for all platforms are generated from `app-icon.svg` with `npm run tauri icon app-icon.svg`.
+App icons for all platforms are generated from `app-icon.svg`:
+
+```sh
+npm run tauri icon app-icon.svg -- --ios-color "#e8590c"
+magick mogrify -background "#e8590c" -alpha remove -alpha off src-tauri/gen/apple/Assets.xcassets/AppIcon.appiconset/*.png
+```
+
+iOS rounds the icon's corners itself, so `--ios-color` fills the transparent corners with the background orange. The command writes the iOS icons straight into the Xcode project. The `magick` step (ImageMagick) then drops their alpha channel, which the App Store rejects.
