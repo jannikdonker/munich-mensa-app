@@ -1,6 +1,6 @@
 [package]
 name = "munich-mensa"
-version = "0.1.2"
+version = "0.1.3"
 description = "Map of Munich's student canteens, cafés and bistros with weekly menus"
 edition = "2024"
 rust-version = "1.90"
