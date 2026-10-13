@@ -1,0 +1,148 @@
+:root {
+  --bg: #eef0f3;
+  --surface: #ffffff;
+  --surface-2: #f1f3f5;
+  --border: #e2e5e9;
+  --text-1: #1b1f24;
+  --text-2: #5b6470;
+  --text-3: #959ca5;
+  --accent: #1864ab;
+  --on-accent: #ffffff;
+  --map-bg: #e8e6e1;
+
+  --kind-mensa: #e8590c;
+  --kind-bistro: #7048e8;
+  --kind-cafe: #8d5524;
+
+  --open: #2b8a3e;
+  --open-bg: #e6f6e9;
+  --open-solid: #2f9e44;
+  --later: #b35c00;
+  --later-bg: #fff3dc;
+  --later-solid: #f08c00;
+
+  --vegan: #2b8a3e;
+  --vegan-bg: #e6f6e9;
+  --veggie: #5c7c0c;
+  --veggie-bg: #f1f8dc;
+  --fish: #1864ab;
+  --fish-bg: #e3f0fc;
+  --meat: #c92a2a;
+  --meat-bg: #fdecec;
+
+  --shadow: 0 8px 30px rgb(0 0 0 / 0.12);
+
+  color-scheme: light;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Noto Sans',
+    Ubuntu,
+    sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text-1);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #101215;
+  --surface: #1b1e23;
+  --surface-2: #262a31;
+  --border: #30353d;
+  --text-1: #e9ecef;
+  --text-2: #a3abb5;
+  --text-3: #6c747e;
+  --accent: #74c0fc;
+  --on-accent: #0b2239;
+  --map-bg: #1a1c20;
+
+  --kind-mensa: #e8590c;
+  --kind-bistro: #7950f2;
+  --kind-cafe: #a0632b;
+
+  --open: #69db7c;
+  --open-bg: #1d3a24;
+  --later: #ffc078;
+  --later-bg: #3d2c12;
+
+  --vegan: #8ce99a;
+  --vegan-bg: #1d3a24;
+  --veggie: #c0eb75;
+  --veggie-bg: #2b3515;
+  --fish: #a5d8ff;
+  --fish-bg: #16304a;
+  --meat: #ffa8a8;
+  --meat-bg: #45201f;
+
+  --shadow: 0 8px 30px rgb(0 0 0 / 0.5);
+}
+
+/* Until the script has applied the saved theme, at least avoid a white flash. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #101215;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+button:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* MapLibre controls in dark mode */
+[data-theme='dark'] .maplibregl-ctrl-group {
+  background: var(--surface);
+}
+[data-theme='dark'] .maplibregl-ctrl-group button + button {
+  border-top-color: var(--border);
+}
+[data-theme='dark'] .maplibregl-ctrl-group button .maplibregl-ctrl-icon,
+[data-theme='dark'] .maplibregl-ctrl-attrib-button {
+  filter: invert(1);
+}
+[data-theme='dark'] .maplibregl-ctrl.maplibregl-ctrl-attrib {
+  background: rgb(27 30 35 / 0.8);
+  color: var(--text-2);
+}
+[data-theme='dark'] .maplibregl-ctrl-attrib a {
+  color: var(--text-2);
+}
+
+.maplibregl-map {
+  font: inherit;
+}

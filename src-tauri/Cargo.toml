@@ -1,0 +1,29 @@
+[package]
+name = "munich-mensa"
+version = "0.1.0"
+description = "Map of Munich's student canteens, cafés and bistros with weekly menus"
+edition = "2024"
+rust-version = "1.90"
+
+[lib]
+name = "munich_mensa_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.7.2", features = [] }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+tauri = { version = "2.12.3", features = [] }
+tauri-plugin-log = "2"
+# rustls + webpki roots (ring) builds the same on desktop, Android and iOS.
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "gzip", "http2"] }
+tauri-plugin-opener = "2"
+scraper = "0.27"
+
+# Access to the WebKitGTK widget, to take touchpad pinches away from page magnification.
+[target.'cfg(target_os = "linux")'.dependencies]
+gtk = "0.18"
+webkit2gtk = "2.0"
