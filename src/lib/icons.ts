@@ -11,10 +11,11 @@ export const iconPaths = {
   close: 'M6 6l12 12M18 6 6 18',
   sun: 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41',
   moon: 'M20.5 14.1A8.5 8.5 0 1 1 9.9 3.5a6.6 6.6 0 0 0 10.6 10.6Z',
+  star: 'M12 2.9 14.5 9.5 21.5 9.8 16 14.2 17.9 21 12 17.1 6.1 21 8 14.2 2.5 9.8 9.5 9.5Z',
 }
 
 export type IconName = keyof typeof iconPaths
 
-export function iconSvg(name: IconName, size = 18): string {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${iconPaths[name]}"/></svg>`
+export function iconSvg(name: IconName, size = 18, filled = false): string {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${filled ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${iconPaths[name]}"/></svg>`
 }

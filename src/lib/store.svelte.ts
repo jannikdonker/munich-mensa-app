@@ -32,6 +32,7 @@ export type DayDishes =
 export interface ListItem {
   canteen: Canteen
   kind: Kind
+  favorite: boolean
   state: OpenState
   day: DayDishes
   /** Dishes matching the search query. */
@@ -52,6 +53,16 @@ function loadPref<T extends string>(key: string, allowed: readonly T[], fallback
     return allowed.includes(value as T) ? (value as T) : fallback
   } catch {
     return fallback
+  }
+}
+
+/** Canteen ids saved as a JSON array. */
+function loadFavorites(): string[] {
+  try {
+    const value: unknown = JSON.parse(localStorage.getItem('munich-mensa.favorites') ?? '[]')
+    return Array.isArray(value) ? value.filter((id): id is string => typeof id === 'string') : []
+  } catch {
+    return []
   }
 }
 
@@ -94,6 +105,8 @@ class AppState {
   dark = $derived(this.theme === 'dark' || (this.theme === 'system' && this.systemDark))
   kinds = $state<Record<Kind, boolean>>({ mensa: true, bistro: true, cafe: true })
   onlyOpen = $state(false)
+  favorites = $state<string[]>(loadFavorites())
+  onlyFavorites = $state(false)
   query = $state('')
   selectedId = $state<string | null>(null)
 
@@ -198,6 +211,16 @@ class AppState {
     return openState(canteen, this.date, this.now)
   }
 
+  isFavorite(canteenId: string): boolean {
+    return this.favorites.includes(canteenId)
+  }
+
+  toggleFavorite(canteenId: string) {
+    this.favorites = this.isFavorite(canteenId)
+      ? this.favorites.filter((id) => id !== canteenId)
+      : [...this.favorites, canteenId]
+  }
+
   /** Flips light/dark. Choosing what the OS shows anyway goes back to following the OS. */
   toggleTheme() {
     const dark = !this.dark
@@ -216,6 +239,8 @@ class AppState {
     for (const canteen of this.canteens) {
       const kind = kindOf(canteen)
       if (!this.kinds[kind]) continue
+      const favorite = this.isFavorite(canteen.canteen_id)
+      if (this.onlyFavorites && !favorite) continue
       const state = this.stateOf(canteen)
       if (this.onlyOpen && !isOpenOn(state)) continue
       const day = this.dishesOn(canteen.canteen_id, this.date)
@@ -229,10 +254,11 @@ class AppState {
         }
         if (!text.includes(query) && matches.length === 0) continue
       }
-      items.push({ canteen, kind, state, day, matches })
+      items.push({ canteen, kind, favorite, state, day, matches })
     }
     return items.sort(
       (a, b) =>
+        Number(b.favorite) - Number(a.favorite) ||
         STATE_RANK[a.state.kind] - STATE_RANK[b.state.kind] ||
         KINDS.indexOf(a.kind) - KINDS.indexOf(b.kind) ||
         a.canteen.name.localeCompare(b.canteen.name, this.lang),

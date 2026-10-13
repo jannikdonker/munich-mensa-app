@@ -66,6 +66,15 @@
       <button class="chip chip--open" class:on={app.onlyOpen} aria-pressed={app.onlyOpen} onclick={() => (app.onlyOpen = !app.onlyOpen)}>
         {openLabel}
       </button>
+      <button
+        class="chip chip--favorite"
+        class:on={app.onlyFavorites}
+        aria-pressed={app.onlyFavorites}
+        onclick={() => (app.onlyFavorites = !app.onlyFavorites)}
+      >
+        <Icon name="star" size={15} filled={app.onlyFavorites} />
+        {t(app.lang, 'favorites')}
+      </button>
     </div>
 
     <div class="segmented" role="radiogroup" aria-label="Diet">
@@ -79,7 +88,7 @@
 
   <ul class="items">
     {#each items as item (item.canteen.canteen_id)}
-      <li>
+      <li class="row">
         <button class="item" onclick={() => onselect(item.canteen.canteen_id)}>
           <span class="badge badge--{item.kind}"><Icon name={item.kind} size={18} /></span>
           <span class="main">
@@ -100,9 +109,21 @@
             {/if}
           </span>
         </button>
+        <button
+          class="star"
+          class:on={item.favorite}
+          aria-pressed={item.favorite}
+          aria-label={t(app.lang, item.favorite ? 'removeFavorite' : 'addFavorite')}
+          title={t(app.lang, item.favorite ? 'removeFavorite' : 'addFavorite')}
+          onclick={() => app.toggleFavorite(item.canteen.canteen_id)}
+        >
+          <Icon name="star" size={18} filled={item.favorite} />
+        </button>
       </li>
     {:else}
-      <li class="empty">{t(app.lang, 'noResults')}</li>
+      <li class="empty">
+        {t(app.lang, app.onlyFavorites && app.favorites.length === 0 ? 'noFavorites' : 'noResults')}
+      </li>
     {/each}
     <li class="source">{t(app.lang, 'source')}</li>
   </ul>
@@ -184,6 +205,10 @@
   .chip--open.on {
     background: var(--open-solid);
   }
+  .chip--favorite.on {
+    background: var(--favorite);
+    color: #1b1f24;
+  }
   .segmented {
     display: flex;
     padding: 3px;
@@ -211,16 +236,37 @@
     flex: 1;
     min-height: 0;
   }
+  .row {
+    position: relative;
+  }
   .item {
     width: 100%;
     display: flex;
     gap: 0.75rem;
-    padding: 0.7rem 1rem;
+    padding: 0.7rem 3rem 0.7rem 1rem;
     text-align: left;
     color: inherit;
   }
   .item:hover {
     background: var(--surface-2);
+  }
+  /* Beside the row's button rather than inside it: buttons can't be nested. */
+  .star {
+    position: absolute;
+    top: 0.45rem;
+    right: 0.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--text-3);
+  }
+  .star:hover {
+    color: var(--text-1);
+  }
+  .star.on {
+    color: var(--favorite);
   }
   .badge {
     flex: none;

@@ -41,6 +41,10 @@ const strings = {
     source: 'Daten: TUM-Dev eat-api · Studierendenwerk München Oberbayern',
     expand: 'Liste ausklappen',
     collapse: 'Liste einklappen',
+    favorites: 'Favoriten',
+    addFavorite: 'Zu Favoriten hinzufügen',
+    removeFavorite: 'Aus Favoriten entfernen',
+    noFavorites: 'Noch keine Favoriten. Mit dem Stern bei einem Standort fügst du ihn hinzu.',
   },
   en: {
     searchPlaceholder: 'Search canteens or dishes …',
@@ -81,6 +85,10 @@ const strings = {
     source: 'Data: TUM-Dev eat-api · Studierendenwerk München Oberbayern',
     expand: 'Expand list',
     collapse: 'Collapse list',
+    favorites: 'Favourites',
+    addFavorite: 'Add to favourites',
+    removeFavorite: 'Remove from favourites',
+    noFavorites: 'No favourites yet. Use the star next to a location to add it.',
   },
 } satisfies Record<Lang, Record<string, string>>
 

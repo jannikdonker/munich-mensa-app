@@ -7,6 +7,7 @@ A cross-platform [Tauri v2](https://v2.tauri.app) app that shows every Studieren
 - **Weekly menus.** Pick any weekday of this week or the next two. Dishes are grouped by counter and each gets a fitting emoji. They show vegan/veggie/meat/fish badges, prices for students, staff or guests, and allergens (tap a dish).
 - **Opening hours** with a live "open until …" or "opens at …" status in Munich time.
 - **Search** across location names *and* the selected day's dishes ("curry", "Schnitzel" …), plus filters for type, diet and "still open".
+- **Favourites.** Star a location in the list or its details. Favourites come first in the list, carry a star on the map and have their own filter. They are saved on the device.
 - **German / English** and a responsive layout: a sidebar on desktop and a bottom sheet on phones that you swipe up and down.
 - **Light / dark** follows the system by default. The sun/moon button overrides it, and switching back to what the system shows returns to following it.
 - **Works offline.** Menus and map tiles are cached on disk by the Rust side.

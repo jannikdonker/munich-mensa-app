@@ -94,9 +94,10 @@
     untrack(() => fitTo(app.canteens.filter(isCentral), false))
   })
 
-  function pinHtml(kind: Kind, state: OpenState['kind'], selected: boolean): string {
+  function pinHtml(kind: Kind, state: OpenState['kind'], selected: boolean, favorite: boolean): string {
     const classes = ['pin', `pin--${kind}`, `pin--${state}`, selected ? 'pin--selected' : '']
-    return `<div class="${classes.join(' ')}">${iconSvg(kind, 18)}</div>`
+    const star = favorite ? `<span class="pin-star">${iconSvg('star', 9, true)}</span>` : ''
+    return `<div class="${classes.join(' ')}">${iconSvg(kind, 18)}</div>${star}`
   }
 
   function showTooltip(canteen: Canteen) {
@@ -136,9 +137,9 @@
       }
       entry.marker.setOffset([offsets.get(id) ?? 0, 0])
       const selected = id === app.selectedId
-      const signature = `${item.kind}|${item.state.kind}|${selected}`
+      const signature = `${item.kind}|${item.state.kind}|${selected}|${item.favorite}`
       if (entry.signature !== signature) {
-        entry.element.innerHTML = pinHtml(item.kind, item.state.kind, selected)
+        entry.element.innerHTML = pinHtml(item.kind, item.state.kind, selected, item.favorite)
         entry.element.style.zIndex = selected ? '2' : '1'
         entry.signature = signature
       }
@@ -262,6 +263,28 @@
   }
   :global(.pin--later::after) {
     background: var(--later-solid);
+  }
+  /* Favourite badge, opposite the open/closed dot. It sits beside the pin rather than in
+     it, so that a closed pin's grey filter leaves it alone; it follows the pin's scaling. */
+  :global(.pin-star) {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 15px;
+    height: 15px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: var(--favorite);
+    color: #fff;
+    transition: transform 0.15s ease;
+  }
+  :global(.pin--selected + .pin-star) {
+    transform: translate(-4px, -4px);
+  }
+  :global(.pin-anchor:hover .pin:not(.pin--selected) + .pin-star) {
+    transform: translate(-2px, -2px);
   }
   :global(.pin--selected) {
     transform: scale(1.3);

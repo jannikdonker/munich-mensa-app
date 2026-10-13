@@ -12,6 +12,7 @@
   let { canteen, onclose }: { canteen: Canteen; onclose: () => void } = $props()
 
   const kind = $derived(kindOf(canteen))
+  const favorite = $derived(app.isFavorite(canteen.canteen_id))
   const day = $derived(app.dishesOn(canteen.canteen_id, app.date))
   const selectedDayKey = $derived(dayKey(app.date))
   let expanded = $state<string | null>(null)
@@ -49,6 +50,16 @@
         <p class="note">{canteen.note[app.lang]}</p>
       {/if}
     </div>
+    <button
+      class="star"
+      class:on={favorite}
+      aria-pressed={favorite}
+      aria-label={t(app.lang, favorite ? 'removeFavorite' : 'addFavorite')}
+      title={t(app.lang, favorite ? 'removeFavorite' : 'addFavorite')}
+      onclick={() => app.toggleFavorite(canteen.canteen_id)}
+    >
+      <Icon name="star" size={20} filled={favorite} />
+    </button>
   </header>
 
   <div class="actions">
@@ -151,7 +162,7 @@
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    padding: 0.9rem 1rem 0.4rem 0.5rem;
+    padding: 0.9rem 0.5rem 0.4rem;
   }
   .back {
     flex: none;
@@ -184,7 +195,25 @@
     background: var(--kind-cafe);
   }
   .title {
+    flex: 1;
     min-width: 0;
+  }
+  .star {
+    flex: none;
+    align-self: flex-start;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--text-3);
+  }
+  .star:hover {
+    color: var(--text-1);
+    background: var(--surface-2);
+  }
+  .star.on {
+    color: var(--favorite);
   }
   h2 {
     margin: 0;

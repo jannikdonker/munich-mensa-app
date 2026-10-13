@@ -36,6 +36,7 @@
   $effect(() => savePref('priceGroup', app.priceGroup))
   $effect(() => savePref('diet', app.diet))
   $effect(() => savePref('theme', app.theme))
+  $effect(() => savePref('favorites', JSON.stringify(app.favorites)))
   $effect(() => {
     document.documentElement.dataset.theme = app.dark ? 'dark' : 'light'
   })
