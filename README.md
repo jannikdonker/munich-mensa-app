@@ -1,6 +1,19 @@
 # Munich Mensa
 
+> [!WARNING]
+> This app was 100% vibecoded for a personal use case, and nobody has read the code. Use it at your own judgement.
+
 A cross-platform [Tauri v2](https://v2.tauri.app) app that shows every Studierendenwerk mensa, StuBistro and StuCafé in and around Munich on a map. It includes the week's menus, prices and opening hours.
+
+<p>
+  <img src="screenshots/macos/list.jpg" width="49%" alt="macOS: list of locations with favourites at the top, next to the map">
+  <img src="screenshots/macos/details.jpg" width="49%" alt="macOS: menu of Mensa Leopoldstraße, with its pin selected on the map">
+</p>
+<p>
+  <img src="screenshots/ios/map.jpg" width="32%" alt="iPhone: map with the collapsed bottom sheet">
+  <img src="screenshots/ios/details.jpg" width="32%" alt="iPhone: details of Mensa Leopoldstraße over the map">
+  <img src="screenshots/ios/menu.jpg" width="32%" alt="iPhone: the day's menu with the sheet swiped open">
+</p>
 
 - **Map** of all locations within 45 km of Marienplatz, which covers Garching, Freising/Weihenstephan and Martinsried. It uses a minimal vector basemap (MapLibre GL). Pins are colour-coded by type and carry an open/closed dot.
 - **Touchpad gestures**: pinch zooms the map around your fingers, never the whole UI. Two-finger scrolling pans the map, and a mouse wheel zooms.
