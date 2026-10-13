@@ -5,6 +5,10 @@ use std::{
     time::{Duration, SystemTime, UNIX_EPOCH},
 };
 
+/// Largest response body accepted. The biggest real ones (dense map tiles) are well under
+/// 1 MB; the cap keeps a misbehaving server from filling memory.
+const MAX_BODY_BYTES: usize = 10 * 1024 * 1024;
+
 /// Shared HTTP client. The User-Agent identifies the app, as the OSM tile policy requires.
 pub struct HttpClient(reqwest::Client);
 
@@ -21,15 +25,29 @@ impl HttpClient {
         Ok(Self(client))
     }
 
-    /// GETs `url` and returns the body, or `None` for a 404.
+    /// GETs `url` and returns the body, or `None` for a 404. Bodies over
+    /// `MAX_BODY_BYTES` (after decompression) are an error.
     pub async fn get(&self, url: &str) -> Result<Option<Vec<u8>>, String> {
         let response = self.0.get(url).send().await.map_err(|e| e.to_string())?;
         if response.status() == reqwest::StatusCode::NOT_FOUND {
             return Ok(None);
         }
-        let response = response.error_for_status().map_err(|e| e.to_string())?;
-        let bytes = response.bytes().await.map_err(|e| e.to_string())?;
-        Ok(Some(bytes.to_vec()))
+        let mut response = response.error_for_status().map_err(|e| e.to_string())?;
+        let too_large = || format!("{url}: response larger than {MAX_BODY_BYTES} bytes");
+        if response
+            .content_length()
+            .is_some_and(|len| len > MAX_BODY_BYTES as u64)
+        {
+            return Err(too_large());
+        }
+        let mut body = Vec::new();
+        while let Some(chunk) = response.chunk().await.map_err(|e| e.to_string())? {
+            if body.len() + chunk.len() > MAX_BODY_BYTES {
+                return Err(too_large());
+            }
+            body.extend_from_slice(&chunk);
+        }
+        Ok(Some(body))
     }
 }
 
