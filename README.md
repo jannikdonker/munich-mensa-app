@@ -166,3 +166,7 @@ magick mogrify -background "#e8590c" -alpha remove -alpha off src-tauri/gen/appl
 ```
 
 iOS rounds the icon's corners itself, so `--ios-color` fills the transparent corners with the background orange. The command writes the iOS icons straight into the Xcode project. The `magick` step (ImageMagick) then drops their alpha channel, which the App Store rejects.
+
+## License
+
+The code is released under the [MIT License](LICENSE). Menu, location and map data belong to their respective sources listed under [Data](#data).
