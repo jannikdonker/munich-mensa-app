@@ -1,3 +1,4 @@
+import { animalIn } from './dishEmoji'
 import { locale } from './i18n'
 import type { Canteen, Diet, Dish, Kind, Lang, Price } from './types'
 
@@ -47,7 +48,11 @@ export function dietOf(dish: Dish): 'vegan' | 'vegetarian' | 'fish' | 'meat' | n
   if (l.includes('VEGAN')) return 'vegan'
   if (l.includes('VEGETARIAN')) return 'vegetarian'
   if (l.includes('FISH')) return 'fish'
-  if (l.includes('MEAT') || l.includes('PORK') || l.includes('BEEF') || l.includes('POULTRY')) return 'meat'
+  if (['PORK', 'BEEF', 'VEAL', 'POULTRY', 'LAMB', 'WILD_MEAT'].some((m) => l.includes(m))) return 'meat'
+  // The Studierendenwerk only says whether a dish is meatless, and eat-api turns every "not
+  // meatless" into MEAT, so cheese made with animal rennet (Bergkäse, Gorgonzola) or desserts
+  // with gelatin get it too. Only believe it when the name or counter names an animal.
+  if (l.includes('MEAT')) return animalIn(dish) ?? null
   return null
 }
 

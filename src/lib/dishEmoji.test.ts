@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { dishEmoji } from './dishEmoji.ts'
+import { animalIn, dishEmoji } from './dishEmoji.ts'
 
 const emoji = (name: string, labels: string[] = [], dish_type = 'Gericht 1') => dishEmoji({ name, dish_type, labels })
 
@@ -59,4 +59,21 @@ test('falls back to the counter, then the diet', () => {
   assert.equal(emoji('Schnittlauchdip', [], 'Vegetarisch/fleischlos'), '🍽️')
   assert.equal(emoji('Schnittlauchdip', ['VEGETARIAN'], 'Vegetarisch/fleischlos'), '🥦')
   assert.equal(emoji('Geheimrezept', ['MEAT'], 'Gericht 2'), '🍖')
+})
+
+test('animalIn finds meat or fish in the name or counter', () => {
+  const animal = (name: string, dish_type = 'Gericht 1') => animalIn({ name, dish_type })
+  assert.equal(animal('Spinatspätzlepfanne mit Bergkäse und abgeschmelzten Zwiebeln'), undefined)
+  assert.equal(animal('Pasta tricolore mit Spinat, Gorgonzola und Tomate', 'Vegan'), undefined)
+  assert.equal(animal('Tiramisu', 'Dessert (Glas)'), undefined)
+  assert.equal(animal('Spinatknödel Tiroler Art mit Bergkäse', 'Vegetarisch/fleischlos'), undefined)
+  assert.equal(animal('Hähnchencurry mit Wokgemüse'), 'meat')
+  assert.equal(animal('Pasta Schinken- Käsesauce'), 'meat')
+  assert.equal(animal('Ravioli mit Fleischfüllung (s) mit Tomaten-Kräutersauce'), 'meat')
+  assert.equal(animal('Gebratener Schweinelachs'), 'meat')
+  assert.equal(animal('Zanderfilet (1 Stück) nach Müllerin Art'), 'fish')
+  assert.equal(animal('Gebackene Calamari (10 Stück)'), 'fish')
+  assert.equal(animal('Pizza Verdura mit gebratenem Gemüse und Mozzarella', 'Pizza'), undefined)
+  assert.equal(animal('Schweinebraten (1 Scheibe)'), 'meat')
+  assert.equal(animal('Tagesgericht', 'Fleisch'), 'meat')
 })
